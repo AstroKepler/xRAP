@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 
+
 void saveGridToFile(const std::vector<std::vector<int>>& grid, const std::string& filename) {
     std::ofstream file(filename);
     if (!file.is_open()) {
