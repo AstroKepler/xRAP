@@ -1,13 +1,9 @@
-//
-// Created by kepler1b on 5/16/25.
-//
-
+// C++
 #include "xRAP_core-save.h"
 #include <vector>
 #include <fstream>
 #include <iostream>
 #include <string>
-
 
 void saveGridToFile(const std::vector<std::vector<int>>& grid, const std::string& filename) {
     std::ofstream file(filename);
@@ -15,14 +11,17 @@ void saveGridToFile(const std::vector<std::vector<int>>& grid, const std::string
         std::cerr << "Error opening file: " << filename << std::endl;
         return;
     }
-
-    for (const auto& row : grid) {
-        for (const auto& value : row) {
-            file << value << " ";
+    if (grid.empty())
+        return;
+    size_t numCols = grid.size();
+    size_t numRows = grid[0].size();
+    // Iterate rows in reverse order so that the top row is output first.
+    for (int row = static_cast<int>(numRows) - 1; row >= 0; row--) {
+        for (size_t col = 0; col < numCols; col++) {
+            file << grid[col][row] << " ";
         }
-        file << "";
+        file << "\n";
     }
-
     file.close();
 }
 
@@ -32,16 +31,19 @@ void saveLandMaskToFile(const std::vector<std::vector<std::vector<int>>>& mask, 
         std::cerr << "Error opening file: " << filename << std::endl;
         return;
     }
-
+    // Process each layer similarly.
     for (const auto& layer : mask) {
-        for (const auto& row : layer) {
-            for (const auto& value : row) {
-                file << value << " ";
+        if (layer.empty())
+            continue;
+        size_t numCols = layer.size();
+        size_t numRows = layer[0].size();
+        for (int row = static_cast<int>(numRows) - 1; row >= 0; row--) {
+            for (size_t col = 0; col < numCols; col++) {
+                file << layer[col][row] << " ";
             }
-            file << "";
+            file << "\n";
         }
-        file << "";
+        file << "\n";
     }
-
     file.close();
 }
