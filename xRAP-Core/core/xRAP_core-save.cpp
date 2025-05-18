@@ -31,15 +31,18 @@ void saveLandMaskToFile(const std::vector<std::vector<std::vector<int>>>& mask, 
         std::cerr << "Error opening file: " << filename << std::endl;
         return;
     }
-    // Process each layer similarly.
-    for (const auto& layer : mask) {
+    // Each layer gets a header so that Python can separate layers.
+    for (size_t layerIdx = 0; layerIdx < mask.size(); ++layerIdx) {
+        const auto &layer = mask[layerIdx];
         if (layer.empty())
             continue;
-        size_t numCols = layer.size();
-        size_t numRows = layer[0].size();
+        file << "Layer " << layerIdx << "\n";
+        size_t numRows = layer.size();
+        size_t numCols = layer[0].size();
+        // Output rows in reverse order so that the top row appears first.
         for (int row = static_cast<int>(numRows) - 1; row >= 0; row--) {
             for (size_t col = 0; col < numCols; col++) {
-                file << layer[col][row] << " ";
+                file << layer[row][col] << " ";
             }
             file << "\n";
         }

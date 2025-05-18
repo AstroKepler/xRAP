@@ -2,20 +2,19 @@
 // Created by kepler1b on 5/15/25.
 //
 
-#include "xRAP_core.h"
+#include <iostream>
+#include <xRAP_core.h>
+#include <xRAP_core-utils.h>
+#include <temperature_solver.h>
 
-void start_simulation(const int t_step_size, const int t_steps, const int t_sub_steps, const int duration) {
-    for (int i = 0; i < t_sub_steps; i++) {
-        // Calculate Data
+int step_num = 0;
 
-        if (i % t_step_size == 0) {
-            // Save Data at that step
-        }
-    }
 
-}
 
-void time_step() {
+void time_step(const int t_sub_steps) {
+
+    step_num++;
+
     /*
      *  TIME STEP
      *
@@ -31,5 +30,22 @@ void time_step() {
     // Shortwave Solver
     // Rain Solver
     // Fog Solver
+}
+
+void start_simulation(const int t_steps, const int t_sub_steps) {
+
+    std::cout << "Time Sub Steps " << t_sub_steps << std::endl;
+    std::cout << "Main Time Steps " << t_steps << std::endl;
+    for (int i = 0; i < (t_steps*24)+1; i++) {
+        // Calculate Data
+        time_step(t_sub_steps);
+        if (i % 24 == 0) {
+            // Save Data at that step
+            std::cout << "Full Step completed: " << i/24 << std::endl;
+        } else {
+            std::cout << "Sub Integer step: " << i << std::endl;
+        }
+
+    }
 
 }

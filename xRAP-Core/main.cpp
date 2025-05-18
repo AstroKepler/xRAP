@@ -52,11 +52,10 @@ int main() {
 
 
     std::cout << "Initialised Variables" << std::endl;
-    std::cout << size(height_grid) << " bytes";
+    std::cout << "[DEBUG] Size of Height grid:" << size(height_grid) << " bytes" << std::endl;
+    std::cout << "Intiailising Core..." << std::endl;
 
-
-
-
+    start_simulation(15, (15*24));
 
     // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }

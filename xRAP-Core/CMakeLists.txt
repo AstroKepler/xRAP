@@ -21,5 +21,7 @@ set(
         ${DOM_CORE}/xRAP_core-height.h
         ${DOM_CORE}/xRAP_core-save.cpp
         ${DOM_CORE}/xRAP_core-save.h
+        ${DOM_CORE}/xRAP_core-utils.cpp
+        ${DOM_CORE}/xRAP_core-utils.h
 )
 add_executable(untitled ${SOURCE_FILES})
